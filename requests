@@ -1,0 +1,29 @@
+
+#爬取网页的框架
+
+# 1. 知道自己要爬的网页
+# 2. 使用requests获取该网页的一个response对象
+# 3. 对该对象进行
+
+#requests得到的response对象,可能还需要用html解析器来解析(beautifulsoup...),否则难以使用
+
+URL = "http://www.baidu.com"
+
+r = requests.get(URL) 
+
+print (r.status_code)   #http请求的返回状态，200成功,404失败,等等...
+
+print (r.txt)           #http响应内容的字符串格式,即url中的内容
+
+print (r.content)       #.............二进制格式.............
+
+print (r.encoding)      #从header中猜测可能的编码(utf-8...)
+
+print (r.apparent_encoding)       #从内容中猜测可能的编码
+
+
+
+
+
+
+
