@@ -41,6 +41,29 @@ print (r.url)
 #html网页中，可能我们需要的数据部分储存在某个<>中，通过这个来指定抓取
 
 
+#**kwargs 中的  headers
+
+headers = {'User-Agent':"Mozilla/5.0 (Windows NT 6.1; WOW64)"
+            " AppleWebKit/537.1 (KHTML, like Gecko) "
+            "Chrome/22.0.1207.1 Safari/537.1"}
+            #浏览器请求头（大部分网站没有这个请求头会报错)
+            #模拟浏览器版本
+            
+r = requests.request('GET','http://www.baidu.com',headers = headers)
+
+#**kwargs 中的  proxies
+
+pxs = {'http':'http://user:pass@10.10.10.1:1234'
+        'https':'https://10.10.1:4321'  }  #举个例子
+        
+r = requests.request('GET','http://www.baidu.com',proxies = pxs)
+
+#即使用代理进行网页访问
+
+
+
+
+
 requests.get()          #获取网页
 
 requests.head()         #获取网页头信息
