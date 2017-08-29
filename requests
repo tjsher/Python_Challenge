@@ -18,8 +18,43 @@ print (r.txt)           #http响应内容的字符串格式,即url中的内容
 print (r.content)       #.............二进制格式.............
 
 print (r.encoding)      #从header中猜测可能的编码(utf-8...)
+                        #也保存的是r的编码
 
 print (r.apparent_encoding)       #从内容中猜测可能的编码
+
+#requests的异常...(用的时候再查)
+
+r.raise_for_status()    #如果不是200，则返回一个异常
+
+
+requests.request()      #构造一个请求，能够使用下列方法
+                        #requests.request(method,url,**kwargs)
+                        #requests.request('GET',url,**kwargs)
+                        
+                        
+#**kwargs 中的  params
+
+kv = {'key1':'value1','key2':'value2'}
+r = requests.request('GET','http://www.baidu.com',kv)
+print (r.url)
+# http://www.baidu.com?key1=value1&key2=value2
+#html网页中，可能我们需要的数据部分储存在某个<>中，通过这个来指定抓取
+
+
+requests.get()          #获取网页
+
+requests.head()         #获取网页头信息
+print(r.headers)        #头信息储存的地方
+
+requests.post()         #向网页提交post请求
+
+requests.put()          #向网页提交put请求
+
+requests.patch()        #向网页提交局部修改请求
+
+requests.delete()       #向网页提交删除请求
+
+
 
 
 
