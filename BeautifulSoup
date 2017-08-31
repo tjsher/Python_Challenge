@@ -2,6 +2,36 @@
 
 #以下大部分内容摘自beautifulsoup文档
 
+url = "www.baidu.com
+"
 html_doc = requests.get(url)
 
-soup = BeautifulSoup()
+soup = BeautifulSoup(html_doc,'html.parser')      #  'html.parser'为解析器,还有'lxml'
+                                                  # soup为一个BeautifulSoup对象
+                                                  
+print (soup.prettify())                           #按照标准格式输出
+
+
+
+#  find_all(name, attrs,recursive,string,**kwargs)  找搜索当前tag的所有tag子节点
+
+#什么是tag?   <head> ....
+
+#  name                   可以查找所有名字为 name 的tag,字符串对象会被自动忽略掉.
+soup.find_all("title")  # "title"是个tag,  name 参数的值可以是任一类型的过滤器,字符串,正则表达式,列表,方法或是 True 
+
+#  keyword                难以解释，直接上例子
+soup.find_all(id = 'link2')
+                        # 与name相比,多了哪些东西一目了然.当 id 不是tag时,会将 id 作为 某个tag的属性,并搜索每个tag的 id 属性
+                        
+#  string                 搜索文档中的字符串内容.与 name 参数的可选值一样, string 参数接受字符串,正则表达式,列表, True .  
+soup.find_all( string = '字符' )
+
+#一般同时使用 keyword 与 string 来过滤内容( name , keyword)
+soup.find_all( "a" , string = 'xxx')              #找到所有包含string 'xxx'的 tag <a> 
+
+
+
+
+                                                  
+
