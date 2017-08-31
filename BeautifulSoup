@@ -1,0 +1,7 @@
+#当用requests.get得到了一个对象后,使用 对象.text得到的就是html格式的
+
+#以下大部分内容摘自beautifulsoup文档
+
+html_doc = requests.get(url)
+
+soup = BeautifulSoup()
