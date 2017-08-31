@@ -13,7 +13,7 @@ r = requests.get(URL)
 
 print (r.status_code)   #http请求的返回状态，200成功,404失败,等等...
 
-print (r.txt)           #http响应内容的字符串格式,即url中的内容
+print (r.text)           #http响应内容的字符串格式,即url中的内容
 
 print (r.content)       #.............二进制格式.............
 
