@@ -14,6 +14,7 @@ print (soup.prettify())                           #按照标准格式输出
 
 
 #  find_all(name, attrs,recursive,string,**kwargs)  找搜索当前tag的所有tag子节点
+#  soup.find_all ( 'a')   ==  soup.( 'a' )
 
 #什么是tag?   <head> ....
 
