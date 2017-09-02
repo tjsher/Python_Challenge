@@ -13,7 +13,7 @@ print (soup.prettify())                           #按照标准格式输出
 
 
 
-#  find_all(name, attrs,recursive,string,**kwargs)  找搜索当前tag的所有tag子节点
+#  find_all(name, attrs, recursive, string, **kwargs)  找搜索当前tag的所有tag子节点
 #  soup.find_all ( 'a')   ==  soup.( 'a' )
 
 #什么是tag?   <head> ....
@@ -30,6 +30,11 @@ soup.find_all( string = '字符' )
 
 #一般同时使用 keyword 与 string 来过滤内容( name , keyword)
 soup.find_all( "a" , string = 'xxx')              #找到所有包含string 'xxx'的 tag <a> 
+
+
+
+#find(name, attrs, recursive, string, **kwargs)
+#find_all( 'a', limit = 1)  ==   find('a')
 
 
 
