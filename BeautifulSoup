@@ -6,8 +6,8 @@ url = "www.baidu.com
 "
 html_doc = requests.get(url)
 
-soup = BeautifulSoup(html_doc,'html.parser')      #  'html.parser'为解析器,还有'lxml'
-                                                  # soup为一个BeautifulSoup对象
+soup = BeautifulSoup(html_doc.txt,'html.parser')      #  'html.parser'为解析器,还有'lxml'
+                                                      # soup为一个BeautifulSoup对象
                                                   
 print (soup.prettify())                           #按照标准格式输出
 
