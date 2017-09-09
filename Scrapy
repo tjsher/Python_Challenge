@@ -1,1 +1,13 @@
 
+#  http://scrapy-chs.readthedocs.io/zh_CN/0.24/intro/tutorial.html
+#  https://zhuanlan.zhihu.com/p/24669128
+
+
+#  进入储存代码的目录，命令行运行  scrapy startproject scrapyspider
+#  该命令会创建一个 scrapyspider 目录
+
+#  Spider
+#  是一个类,必须定义以下三个属性:
+#  name         用于区别Spider
+#  start_urls   Spider启动时进行爬取的url列表.包含第一个被获取的页面,后续url从初始url获取的数据提取
+#  parse()      方法.
