@@ -14,12 +14,15 @@ print (soup.prettify())                           #按照标准格式输出
 
 
 #  find_all(name, attrs, recursive, string, **kwargs)  找搜索当前tag的所有tag子节点
+#  返回一个列表[]
 #  soup.find_all ( 'a')   ==  soup.( 'a' )
 
 #什么是tag?   <head> ....
 
 #  name  (标签的名字)      可以查找所有名字为 name 的tag,字符串对象会被自动忽略掉.
 soup.find_all("title")  # "title"是个tag,  name 参数的值可以是任一类型的过滤器,字符串,正则表达式,列表,方法或是 True 
+tag = soup.find_all(True)     
+print (tag.name)        # 打印所有标签
 
 #  keyword                难以解释，直接上例子
 soup.find_all(id = 'link2')
@@ -36,7 +39,9 @@ soup.find_all( "a" , string = 'xxx')              #找到所有包含string 'xxx
 #find(name, attrs, recursive, string, **kwargs)
 #find_all( 'a', limit = 1)  ==   find('a')
 
-
+上行遍历...
+下行遍历...
+平行遍历...
 
 
 
