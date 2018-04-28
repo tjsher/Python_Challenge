@@ -1,0 +1,122 @@
+from urllib import request
+from bs4 import BeautifulSoup
+import re
+import xlrd
+import xlwt
+
+# -*- coding: utf-8 -*-
+
+global number
+
+def main():
+    url = r'http://qxj.km.gov.cn/qxfw/qxzs/index.shtml'
+    headers = {
+    
+    'User-Agent': r'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) '
+                  r'Chrome/45.0.2454.85 Safari/537.36 115Browser/6.0.3',
+    'Referer': r'http://www.lagou.com/zhaopin/Python/?labelWords=label',
+    'Connection': 'keep-alive'
+}
+
+
+    req = request.Request(url, headers=headers)
+    page = request.urlopen(req).read()
+    page = page.decode('utf-8')
+    soup = BeautifulSoup(page,'lxml')
+    links = soup.find_all('a')
+    index_infos= []
+    number =1
+    workbook = xlwt.Workbook(encoding='UTF-8')
+    worksheet = workbook.add_sheet('daqiwuranzhishu')
+    re_match4 = re.compile(r'index.\d.shtml')
+    for link in links:#获取下一页信息
+        if(re_match4.findall(link.get('href'))):
+            index_infos.append('http://qxj.km.gov.cn/qxfw/qxzs/'+link.get('href'))
+    for index_info in index_infos:
+        print(index_info)
+    for i in range(len(index_infos)-1):
+        print('第个界面',i+1,'\n-----------------------------------\n')
+        number = get_infos(url,headers,number,workbook,worksheet)
+        url = index_infos[i]
+        print(url)
+        print(number,"outside main ")
+        
+        
+
+
+
+def get_infos(URL,headers,number,workbook,worksheet):
+    
+    req = request.Request(URL, headers=headers)
+    page = request.urlopen(req).read()
+    page = page.decode('utf-8')
+    soup = BeautifulSoup(page,'lxml')
+    re_match = re.compile(r'昆明市城市环境气象预报|城市环境指数预报|城市生活指数预报')
+    re_match3 = re.compile(r'大气污染气象条件指数:')
+    re_match2 = re.compile(r'[+-]*\d\.\d')
+    re_match5 = re.compile(r'\d\d\d\d-\d\d-\d\d')
+    links = soup.find_all('a')
+    href_infos =[]
+    level_infos =[]
+    data_infos = []
+
+
+
+    
+
+    for link in links:
+        if(re_match.findall(link.text)):
+            print(link.get('href'))
+            href_infos.append('http://qxj.km.gov.cn'+link.get('href'))
+    
+    for href_info in href_infos:
+        req = request.Request(href_info, headers=headers)
+        page = request.urlopen(req).read()
+        page = page.decode('utf-8')
+        soup = BeautifulSoup(page,'lxml')
+        links = soup.find_all('p')
+        mark = 0
+        datas = soup.find_all('span')
+        for data in datas:
+            if(re_match5.search(data.text)):
+                data_infos.append(re_match5.search(data.text).group(0))        
+    
+        for link in links:
+            if(re_match3.findall(link.text)):
+                mark =1
+                continue
+            if(mark ==1):
+                if(re_match2.search(link.text)):    
+                    level_infos.append(re_match2.search(link.text).group(0))
+                    mark=  2
+            if(mark ==2):
+                break
+            
+    for level_info in level_infos:
+        print(level_info)
+        worksheet.write(number,2,level_info)
+        number += 1
+    print(number,"inside main 1")
+        
+    number  = number -len(level_infos)
+    
+    for data_info in data_infos:
+        print(data_info)
+        worksheet.write(number,1,data_info)
+        number += 1
+    print(number,"inside main 2")
+    
+    workbook.save(r'C:\Users\tjsher\Desktop\data.xls')
+    return number
+
+main()
+
+
+
+
+
+
+
+
+
+        
