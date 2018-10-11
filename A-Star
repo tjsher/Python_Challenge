@@ -1,0 +1,62 @@
+global Graph,h
+Graph = {
+'a' : {'z':75,'s':140,'t':118},
+'b' : {'f':211,'p':101},
+'c' : {'r':146,'p':138,'d':120},
+'d' : {'m':75,'c':120},
+'f' : {'s':99,'b':211},
+'l' : {'t':111,'m':70},
+'m' : {'l':70,'d':75},
+'o' : {'z':71,'s':151},
+'p' : {'r':97,'b':101,'c':138},
+'r' : {'s':80,'p':97,'c':146},
+'s' : {'o':151,'a':140,'f':99,'r':80},
+'t' : {'a':118,'l':111},
+'z' : {'o':71,'a':75}
+}
+
+h = {
+'a':366,
+'b':0,
+'c':160,
+'d':242,
+'f':176,
+'l':244,
+'m':241,
+'o':380,
+'p':100,
+'r':193,
+'s':253,
+'t':329,
+'z':374
+}
+
+def Romania_DFS():
+    pass
+
+def Romania_A_Star():
+    open_list ={}
+    closed_list = []
+    goal = 'b' # destination
+    open_list['a'] = 0 + h['a'] # start position
+    while(open_list):
+        f = {}
+        current = open_list[0] #get the minium value
+        del open_list[0]
+        closed_list.append(current)#visited plot
+        if(current == goal): break # arrived
+
+        for plot in Graph[current]: #find all lingjie plot
+            open_list[plot] = Graph[current][plot] + h[plot]
+        open_list = sorted(open_list.iteritems(), key=lambda A:A[1])
+    return closed_list
+
+a= Romania_A_Star()
+print(a)
+        
+        
+            
+        
+        
+            
+        
