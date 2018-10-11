@@ -31,32 +31,70 @@ h = {
 'z':374
 }
 
-def Romania_DFS():
-    pass
+def Romania_BFS():
+    queue = []
+    visited = {'a':0,
+    'b':0,
+    'c':0,
+    'd':0,
+    'f':0,
+    'l':0,
+    'm':0,
+    'o':0,
+    'p':0,
+    'r':0,
+    's':0,
+    't':0,
+    'z':0
+    }
+    start = 'a'
+    goal = 'b'
+    tag = 1
+    queue.append(start)
+    visited['a'] = 1
+    ans = []
+    while(tag):
+        for plot in Graph[queue[0]]:
+            print(plot)
+            if(visited[plot] == 1):
+                break
+            visited[plot] = 1
+            if(plot == goal):
+                tag = 0
+                break
+            queue.append(plot)
+        print(queue)
+        ans.append(queue[0])
+        print('del',queue[0])
+        del queue[0]
+
+    print(ans)
+
+
 
 def Romania_A_Star():
-    open_list ={}
+    open_list = []
+    open_dic  = {}
     closed_list = []
     goal = 'b' # destination
-    open_list['a'] = 0 + h['a'] # start position
+    open_dic['a'] = 0 + h['a'] # start position
+    open_list.append(open_dic['a'])
     while(open_list):
-        f = {}
-        current = open_list[0] #get the minium value
+        for dic_ in open_dic.items():
+             if(dic_[1] == open_list[0]):
+                 current = dic_[0] #find the min
+                 print(current)
         del open_list[0]
         closed_list.append(current)#visited plot
         if(current == goal): break # arrived
 
-        for plot in Graph[current]: #find all lingjie plot
-            open_list[plot] = Graph[current][plot] + h[plot]
-        open_list = sorted(open_list.iteritems(), key=lambda A:A[1])
+        for plot in Graph[current]: #find all plot
+            open_dic[plot] = Graph[current][plot] + h[plot]
+            open_list.append(open_dic[plot])
+        open_list.sort()
+
     return closed_list
 
-a= Romania_A_Star()
-print(a)
-        
-        
-            
-        
-        
-            
-        
+#ans= Romania_A_Star()
+#print(ans)
+ans= Romania_BFS()
