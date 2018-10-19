@@ -1,0 +1,45 @@
+
+global graph,colors,location
+graph = {
+"德宏":{"保山"},
+"保山"：{"怒江","大理","临沧"},
+"临沧"：{"迪庆","丽江","大理","保山"},
+"迪庆"：{"怒江","丽江"},
+"丽江"：{"迪庆","怒江","大理","楚雄"},
+"大理"：{"怒江","丽江","楚雄","保山","临沧","普洱"},
+"楚雄"：{"丽江","大理","普洱","玉溪","昆明"},
+"普洱"：{"大理","临沧","西双版纳","红河","玉溪","楚雄"},
+"西双版纳"：{"普洱"},
+"玉溪"：{"楚雄","普洱","红河","昆明"},
+"红河"：{"玉溪","普洱","昆明","文山","曲靖"},
+"文山"：{"曲靖","红河"},
+"昆明"：{"楚雄","玉溪","红河","曲靖","昭通"},
+"曲靖"：{"昭通","昆明","红河","文山"},
+"昭通"}：{"曲靖"}
+}
+colors = [1,2,3,4]# 4 colors
+location = {"德宏":0,"保山":0,"临沧":0,"迪庆":0,"丽江":0,"大理":0,
+            "楚雄":0,"普洱":0,"西双版纳":0,
+            "玉溪":0,"红河":0,"文山":0,"昆明":0,"曲靖":0,"昭通":0}
+def conflict(Plot):
+    used_color=[0] * 4 #4 colors
+    for plot in graph[Plot]:
+        used_color[location[plot]] += 1 #this colors is used_color
+    if(used_color[location[Plot]] == 0 ): #unused
+        return True
+    return False
+
+def dfs(k):
+    if(k == len(graph) -1):
+        print(location.items()) # arrived deepest layer
+    else:
+        plot = graph.items()[k][0]
+        for color in colors:
+            location[plot] = color
+            if (not conflict(plot)):
+                dfs(k+1) # reverse times
+def main():
+    dfs(0)
+    print(location)
+
+main()
