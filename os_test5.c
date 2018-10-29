@@ -16,11 +16,12 @@ void CLIENT()
   int j ;
   shmid = shmget(SHMKEY,1024,0777|IPC_CREAT);
   addr = shmat(shmid,0,0);
-  for(j=9;j>=0;j--)
+  char array[11] = {'H','E','L','L','O','!','W','O','R','L','D'};
+  for(j=10;j>=0;j--)
   {
     while(*addr != -1);
-    printf("(CLIENT)sent : %d\n",j);
-    *addr = j;
+    printf("(CLIENT)sent : %c\n", array[10-j]);
+    *addr = array[10-j];
   }
   exit(0);
 }
@@ -32,7 +33,7 @@ void SERVER()
   do{
     *addr = -1;
     while(*addr == -1);
-    printf("(SERVER) received : %d\n",*addr);
+    printf("(SERVER) received : %c\n",*addr);
   }while(*addr);
   shmctl(shmid,IPC_RMID,0);
   exit(0);
