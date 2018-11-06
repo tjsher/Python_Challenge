@@ -21,7 +21,7 @@ int init_pcb()
   int i=0;
   proc p,temp;
   printf("please input the number of processes:\n");
-  scanf("%d",proc_num);
+  scanf("%d",&proc_num);
   printf("there are %d processes, please input pcb info:\n",proc_num);
 
   p = (proc)malloc(sizeof(struct pcb));
@@ -32,7 +32,7 @@ int init_pcb()
   p->state = 'R';
   p->cputime = 0;
   head = p;
-  for(i = proc_num;i>1;i++){
+  for(i = proc_num;i>1;i--){
     tmp = p;
     p = (proc)malloc(sizeof(struct pcb));
     printf("process id:");
@@ -62,7 +62,7 @@ void display()
 
 void sched()
 {
-  int i,round = 1;
+  int round = 1;
   proc temp = tail;
   proc p = head;
   while(p->total_time > p->cputime)
