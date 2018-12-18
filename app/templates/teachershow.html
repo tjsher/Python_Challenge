@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block content %}
+<html>
+
+<head>
+  <title>{{title}}</title>
+  </head>
+<body>
+  <!-- main -->
+  <div class="main">
+    <form action="" method="post">
+
+    {{form1.group_name.label}}
+    {{form1.group_name(size=32)}}<br>
+    {% for subfield in form1.del_or_add %}
+    <tr>
+        <td>{{ subfield }}</td>
+        <td>{{ subfield.label }}</td>
+    </tr>
+{% endfor %}
+<br>
+    {{form1.group_course.label}}
+    {{form1.group_course(size=32)}}<br>
+    {{form1.stu_choose_course.label}}
+    {{form1.stu_choose_course(size=32)}}<br>
+    {{form1.submit(size=32)}}<br>
+    </form>
+    <br><br>
+    <form action="" method="post">
+    按学生姓名或课程名查找<br>
+    {{form2.search_name.label}}<br>
+    {{form2.search_name(size=32)}}<br>
+    {{form2.search_course.label}}<br>
+    {{form2.search_course(size=32)}}<br>
+    {{form2.submit(size=32)}}<br>
+
+    </form>
+    {%for a in tea%}
+      -------{{a}}<br>
+      {%endfor%}
+  </div>
+  <div class="footer">
+  </div>
+  <!-- //main -->
+</body>
+</html>
+{% endblock %}

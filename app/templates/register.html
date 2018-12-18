@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" type="text/css" href="static/css/register_css/style.css">
+</head>
+<body>
+
+<div id="content">
+    <div class="login-header">
+    </div>
+    <form>
+        <div class="login-input-box">
+            <span class="icon icon-user"></span>
+            <input type="text" placeholder="Please enter your email/phone">
+        </div>
+        <div class="login-input-box">
+            <span class="icon icon-password"></span>
+            <input type="password" placeholder="Please enter your password">
+        </div>
+        <div class="login-button-box">
+            <a href='./index'><button>Login</button></a>
+        </div>
+    </form>
+
+
+
+</div>
+
+</body>
+</html>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+<html>
+
+<head>
+  <title>{{title}}</title>
+  </head>
+<body>
+  <!-- main -->
+  <div class="main">
+    <form action="" method="post">
+
+    {{form.sname.label}}
+    {{form.sname(size=32)}}<br>
+    {{form.sid.label}}
+    {{form.sid(size=32)}}<br>
+    {{form.cname.label}}
+    {{form.cname(size=32)}}<br>
+    {{form.cid.label}}
+    {{form.cid(size=32)}}<br>
+    {{form.grade.label}}
+    {{form.grade(size=32)}}<br>
+    {{form.submit(size=32)}}<br>
+    </form>
+
+  </div>
+  <div class="footer">
+  </div>
+  <!-- //main -->
+</body>
+</html>
+{% endblock %}

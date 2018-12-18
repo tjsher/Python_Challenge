@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+<html>
+<head>
+  <title>登陆</title>
+  </head>
+<body>
+  <!-- main -->
+  <div class="main">
+    <form action="" method="post">
+
+      {{form.username.label}}  {{ form.username(size=32) }}
+        <br>
+        {{form.password.label}}  {{ form.password(size=32) }}
+          <br>
+        {{form.user_type.label}}  {{ form.user_type(size=32) }}
+          <br>
+            {{ form.submit()}}
+            <br>
+    </form>
+  </div>
+  <div class="footer">
+  </div>
+  <!-- //main -->
+</body>
+</html>
+{% endblock %}
