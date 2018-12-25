@@ -4,14 +4,25 @@
 
 <head>
   <title>{{title}}</title>
+  <link rel="stylesheet" href="static/css/table.css">
+
   </head>
 <body>
   <!-- main -->
-  <div class="main">
-
+  <div class="table-wrapper">
+  <table class="fl-table">
+    <thead>
+      <tr>
+        课程名
+      </tr>
+  <tr>
     {%for i in CourseName%}
-    {{i}}<br>
+      <th>{{i}}</th>
     {%endfor%}
+</tr>
+  </thead>
+  </table>
+  </div>
       <form action="" method="post">
       {{form.cname.label}}
       {{form.cname(size=32)}}<br>
@@ -19,10 +30,6 @@
       </form>
 
 
-  </div>
-  <div class="footer">
-  </div>
-  <!-- //main -->
 </body>
 </html>
 {% endblock %}

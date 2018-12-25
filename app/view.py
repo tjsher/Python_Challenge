@@ -32,9 +32,11 @@ def index():
 def login():
     form = LoginForm()
     if request.method == 'POST':
-        user_name = request.form.get('username')
-        password = request.form.get('password')
-        user_type = request.form.get('user_type')
+        user_name = request.form['username']
+        password = request.form['password']
+        user_type = request.form['user_type']
+        print(user_name)
+
         User = UserLogin(user_name,password,user_type)
         if(User.validate()):
             if(user_type == 's'):
@@ -47,9 +49,9 @@ def login():
 def register():
     form = RegisterForm()
     if request.method == 'POST':
-        user_name = request.form.get('username')
-        password = request.form.get('password')
-        user_type = request.form.get('user_type')
+        user_name = request.form['username']
+        password = request.form['password']
+        user_type = request.form['user_type']
         User = UserRegister(user_name,password,user_type)
         User.register()
         return redirect(url_for("login",id=user_name))
@@ -101,6 +103,7 @@ def teaShow(id):
         search_name = request.form.get('search_name')
         search_course = request.form.get('search_course')
         scc = request.form.get('stu_choose_course')
+
         if(group_name):
             info = teacher.group_name()
             return render_template("teachershow.html",title='老师查看',tea=info,form1=form1,
@@ -137,7 +140,7 @@ def teaShow(id):
 
     info = teacher.show()
     return render_template("teachershow.html",title='老师查看',tea=info,form1=form1,
-                                                                form2=form2)
+                                                        id=id,form2=form2)
 
 @app.route('/teacheradd?<id>', methods=['GET', 'POST'])
 def teacheradd(id):

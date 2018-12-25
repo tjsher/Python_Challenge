@@ -4,6 +4,7 @@
 
 <head>
   <title>{{title}}</title>
+  <link rel="stylesheet" href="static/css/table.css">
   </head>
 <body>
   <!-- main -->
@@ -16,14 +17,49 @@
       {{form.Choose(size=32)}}<br>
       {{form.submit(size=32)}}
       </form>
-      {{stu[0]}}<br><br>
-      {%for i in stu[1]%}
-      {{i}}<br>
-      {%endfor%}
-  </div>
-  <div class="footer">
-  </div>
-  <!-- //main -->
+      <div class="table-wrapper">
+    <table class="fl-table">
+        <thead>
+        <tr>
+          <th>学号</th>
+          <th>姓名</th>
+          <th>性别</th>
+          <th>年龄</th>
+          <th>所属专业</th>
+        </tr>
+        <tr>
+          {%for i in stu[0]%}
+          {%for j in i%}
+          <th>{{j}}</th>
+        {%endfor%}
+        </tr>
+        {%endfor%}
+      </thead>
+      </table>
+      </div>
+      <div class="table-wrapper">
+      <table class="fl-table">
+        <thead>
+
+        <tr>
+          <th>学号</th>
+          <th>姓名</th>
+          <th>课程号</th>
+          <th>课程名</th>
+          <th>成绩</th>
+        </tr>
+        <tr>
+
+          {%for i in stu[1]%}
+          {%for j in i%}
+          <th>{{j}}</th>
+        {%endfor%}
+        </tr>
+        {%endfor%}
+        <tr>
+</thead>
+</table>
+</div>
 </body>
 </html>
 {% endblock %}

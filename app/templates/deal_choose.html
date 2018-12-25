@@ -4,13 +4,32 @@
 
 <head>
   <title>{{title}}</title>
+  <link rel="stylesheet" href="static/css/table.css">
+
   </head>
 <body>
-  <!-- main -->
-  <div class="main">
-    {%for a in info%}
-      -------{{a}}<br>
-      {%endfor%}
+
+  <div class="table-wrapper">
+  <table class="fl-table">
+    <thead>
+      <tr>
+        <th>学号</th>
+        <th>姓名</th>
+        <th>打算选课的课程号</th>
+        <th>打算选课的课程名</th>
+      </tr>
+      <tr>
+    {%for i in info%}
+    {%for j in i%}
+    <th>{{j}}</th>
+    {%endfor%}    {%endfor%}
+
+
+  </tr>
+  </thead>
+  </table>
+  </div>
+
     <form action="" method="post">
 
     {{form.sname.label}}
@@ -20,11 +39,6 @@
     {{form.submit(size=32)}}<br>
     </form>
 
-
-  </div>
-  <div class="footer">
-  </div>
-  <!-- //main -->
 </body>
 </html>
 {% endblock %}

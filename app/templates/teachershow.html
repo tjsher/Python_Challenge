@@ -3,21 +3,24 @@
 <html>
 
 <head>
-  <title>{{title}}</title>
+  <title>{{title}}
+</title>
+<link rel="stylesheet" href="static/css/table.css">
+
   </head>
 <body>
-  <!-- main -->
-  <div class="main">
     <form action="" method="post">
 
     {{form1.group_name.label}}
     {{form1.group_name(size=32)}}<br>
     {% for subfield in form1.del_or_add %}
+
     <tr>
         <td>{{ subfield }}</td>
         <td>{{ subfield.label }}</td>
     </tr>
 {% endfor %}
+
 <br>
     {{form1.group_course.label}}
     {{form1.group_course(size=32)}}<br>
@@ -28,20 +31,42 @@
     <br><br>
     <form action="" method="post">
     按学生姓名或课程名查找<br>
-    {{form2.search_name.label}}<br>
-    {{form2.search_name(size=32)}}<br>
-    {{form2.search_course.label}}<br>
-    {{form2.search_course(size=32)}}<br>
+    {{form2.search_name.label}}
+    {{form2.search_name(size=32)}}
+    {{form2.search_course.label}}
+    {{form2.search_course(size=32)}}
     {{form2.submit(size=32)}}<br>
 
     </form>
-    {%for a in tea%}
-      -------{{a}}<br>
+
+    <div class="table-wrapper">
+    <table class="fl-table">
+      <thead>
+
+      <tr>
+        <th>学号</th>
+        <th>姓名</th>
+        <th>课程号</th>
+        <th>成绩</th>
+        <th>操作</th>
+      </tr>
+      <tr>
+
+        {%for i in tea%}
+        {%for j in i%}
+        <th>{{j}}</th>
       {%endfor%}
-  </div>
-  <div class="footer">
-  </div>
-  <!-- //main -->
+      <th><button style="color: #333; ">删除</button>
+      <button style="color: #333; ">修改</button></th>
+
+
+      </tr>
+      {%endfor%}
+      <tr>
+</thead>
+</table>
+</div>
+
 </body>
 </html>
 {% endblock %}

@@ -1,27 +1,29 @@
 {% extends 'base.html' %}
 {% block content %}
+<!DOCTYPE html>
 <html>
 <head>
-  <title>登陆</title>
-  </head>
+	<title>登陆</title>
+		<meta charset="utf-8">
+		<link href="static/css/register.css" rel='stylesheet' type='text/css' />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
 <body>
-  <!-- main -->
-  <div class="main">
-    <form action="" method="post">
+	 <div class="main">
+		<div class="login-form">
+			<h1>你来辣</h1>
+					<div class="head">
+						<img src="static/images/user.png" alt=""/>
+					</div>
+          <form action="/login" method="post">
+						<input id="username" name="username" type="text" value="" placeholder="用户名">
+						<input id="password" name="password" type="password" value="" placeholder="密码">
+            <input id="user_type" name="user_type" type="text" value="" placeholder="用户类型" >
+            <div class="submit">
+							<input id="submit" name="submit"type="submit" value="登陆" >
+					</div>
+				</form>
 
-      {{form.username.label}}  {{ form.username(size=32) }}
-        <br>
-        {{form.password.label}}  {{ form.password(size=32) }}
-          <br>
-        {{form.user_type.label}}  {{ form.user_type(size=32) }}
-          <br>
-            {{ form.submit()}}
-            <br>
-    </form>
-  </div>
-  <div class="footer">
-  </div>
-  <!-- //main -->
 </body>
 </html>
-{% endblock %}
+{%endblock%}

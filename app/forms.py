@@ -7,13 +7,13 @@ class LoginForm(FlaskForm):
     username = StringField('用户名',validators=[DataRequired(message='请输入户名')])
     password = PasswordField('密码',validators=[DataRequired(message='请输入密码')])
     user_type = StringField('用户类型',validators=[DataRequired(message='请输入')])
-    submit = SubmitField('登录')
+    submit = SubmitField('登录',id="sub")
 
 class RegisterForm(FlaskForm):
     username = StringField('用户名',validators=[DataRequired(message='请输入户名')])
     password = PasswordField('密码',validators=[DataRequired(message='请输入密码')])
     user_type = StringField('用户类型',validators=[DataRequired(message='请输入')])
-    submit = SubmitField('注册')
+    submit = SubmitField('注册',id="sub")
 
 class stuForm(FlaskForm):
     order = BooleanField('order')
