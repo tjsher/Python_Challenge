@@ -1,0 +1,154 @@
+use mydb;
+
+/* ------------------------------------------------*/
+create table `login`(
+id char(10) primary key,
+lpass char(10),
+ltype char(10));
+insert into login values('2016106000','1','s');
+insert into login values('200010600','1','t');
+/* ------------------------------------------------*/
+
+create table `student`(
+sid char(10) primary key,
+sname char(10),
+ssex char(2),
+sage smallint(6),
+smajor char(10)
+);
+/* ------------------------------------------------*/
+
+create table `course` (
+cid char(2) primary key,
+cname char(10),
+cmajor char(10)
+);
+/* ------------------------------------------------*/
+
+create table `teacher`(
+tid char(10) primary key,
+tname char(10) ,
+tstuff char(10),
+tmajor char(10));
+/* ------------------------------------------------*/
+
+create table `sc`(
+sid char (10),
+sname char(10),
+cid char(10),
+cname char(10),
+grade smallint,
+primary key(sid,cid));
+/* ------------------------------------------------*/
+
+drop table tc;
+create table `tc`(
+tid char (10),
+tname char(10),
+cid char(10),
+cname char(10),
+primary key(tid,cid));
+/* ------------------------------------------------*/
+drop table nothing;
+create table `nothing`(
+Sid char(10),
+Sname char(10),
+Cid char(10),
+Cname char(10),
+primary key(Sid,Cid));
+/* ------------------------------------------------*/
+select * from teacherView;
+drop view teacherView;
+create view teacherView as select sid,sname,cname,grade from sc where cid in (  
+        select cid from tc where tid = '200010600');
+/* ------------------------------------------------*/
+
+SET sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''));
+SET SQL_SAFE_UPDATES = 0;
+/* ------------------------------------------------*/
+
+show procedure status;
+drop procedure addto;
+DELIMITER $
+create procedure addto (in idi char(10),in namei char(10),
+in idj char(10),in namej char(10), in gra smallint,out a char(20))
+begin
+if( idi in (select sid from student)) then
+if(gra < 100 and gra > 0) then
+if(idj in (select cid from course,student where 
+cmajor = smajor)) then
+insert into sc (sid,sname,cid,cname,grade) values
+				(idi,namei,idj,namej,gra);
+set a = 'got!';
+else
+set a = 'vcid';
+end if;
+else
+set a = 'vgra';
+end if;
+else
+set a = 'vsid';
+end if;
+end
+$
+DELIMITER ;
+/* ------------------------------------------------*/
+drop trigger beforeUpdate;
+DELIMITER $
+create trigger beforeUpdate before update on sc
+for each row 
+begin 
+if(new.grade > 100 or new.grade < 0) then
+set new.grade = old.grade;
+end if;
+end
+$
+DELIMITER ;
+/* ------------------------------------------------*/
+
+drop trigger chooseCouse;
+DELIMITER $
+create trigger chooseCouse before insert on nothing
+for each row 
+begin 
+if(new.Sid not in (select sid from student)) then
+set new.Sid = 'error';
+end if;
+if(new.Sname not in (select sname from student)) then
+set new.Sname = 'error';
+end if;
+if(new.Cid not in (select cid from course)) then
+set new.Cid = 'error';
+end if;
+if(new.Cname not in (select cname from course)) then
+set new.Cname = 'error';
+end if;
+end
+$
+DELIMITER ;
+
+/* ------------------------------------------------*/
+
+grant select on table sc to stu@'localhost';
+grant select on table course to stu@'localhost';
+grant select on table student to stu@'localhost';
+grant insert on table nothing to stu@'localhost';
+drop user stu@'localhost';
+create user stu@'localhost' identified by '0';
+
+create user tec@'localhost' identified by '0';
+grant select,update,delete,insert on table sc to stu@'localhost';
+grant select on table student to stu@'localhost';
+grant select,delete,insert on table nothing to stu@'localhost';
+
+/* ------------------------------------------------*/
+select cid from course where cid in (select cid 
+from sc where sid = '2016106000');
+select * from course;
+select * from sc where sid = '2016106000';
+delete from sc where sid = '2016106000' and cname = '拔草';
+insert into sc values('2016106000','你你','15','拔草',55);
+call addto('2016106000','你你','15','拔草',55,@a);
+select @a;
+
+select * from nothing;
